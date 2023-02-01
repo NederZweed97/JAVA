@@ -2,9 +2,10 @@
 package w3;
 import java.util.*;
 import java.util.Map.Entry;
+
 public class Vereniging {
     private ArrayList<Lidmaatschap> leden;
-    private double winst;
+
 
     public Vereniging(){
         this.leden = new ArrayList<>();
@@ -14,20 +15,22 @@ public class Vereniging {
         this.leden.add(lidmaastchap);
     }
 
-    public void setWinst(){
+    public double getWinst(){
+        double winst = 0;
         for(Lidmaatschap l : leden){
-            this.winst += l.getContributie();
+            winst += l.getContributie();
         }
+        return winst;
     }
 
-    public void getWinst(){
-        System.out.println(this.winst);
-    }
+
 
     public void getJongste(){
+
         Map<String, Integer> lijst = new LinkedHashMap<>();
-        for(Lidmaatschap l : leden){
-            lijst.put(l.persoon.getVoornaam(), l.persoon.getLeeftijd());
+
+            for(Lidmaatschap l : leden){
+            lijst.put(l.persoon.getVoornaam(), l.persoon.getAge());
         }
         Entry<String, Integer> min = Collections.min(lijst.entrySet(), new Comparator<Entry<String, Integer>>() {
             public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
@@ -38,9 +41,10 @@ public class Vereniging {
     }
 
     public void getOudste(){
-        Map<String, Integer> lijst = new LinkedHashMap<>();
+
+         Map<String, Integer> lijst = new LinkedHashMap<>();
         for(Lidmaatschap l : leden){
-            lijst.put(l.persoon.getVoornaam(), l.persoon.getLeeftijd());
+            lijst.put(l.persoon.getVoornaam(), l.persoon.getAge());
         }
         Entry<String, Integer> max = Collections.max(lijst.entrySet(), new Comparator<Entry<String, Integer>>() {
             public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
@@ -78,7 +82,7 @@ public class Vereniging {
         a.setPersoon("Sarah", "Vogelzang", 1997, 4, 3);
         a.setContributie();
         a.setAanmeldDatum(2020, 11, 5);
-        System.out.println(a.persoon.getGeboorteDatum());
+        //System.out.println(a.persoon.getGeboorteDatum());
  
         //Lid b en contributie en aamelding zetten
         Lidmaatschap b = new Lidmaatschap();
@@ -104,13 +108,12 @@ public class Vereniging {
         Ijsclub.addLeden(c);
         Ijsclub.addLeden(d);
         //Bereken de contributie en weergeef deze
-        Ijsclub.setWinst();
-        Ijsclub.getWinst();
+        //Ijsclub.getWinst();
         //geef het jongste en oudste lid weer
         Ijsclub.getJongste();
         Ijsclub.getOudste();
         //Geef het korste en langstee ldimaatschap weer
-        Ijsclub.getKorstLid();
-        Ijsclub.getLangstLid();
+        //Ijsclub.getKorstLid();
+        //Ijsclub.getLangstLid();
     }
 }

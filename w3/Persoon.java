@@ -8,11 +8,15 @@ public class Persoon {
     private String voornaam;
     private String achternaam;
     private LocalDate geboorteDatum;
-    private int leeftijd;
+    private int jaar;
+    private int dag;
+    private int maand;
 
-    public Persoon(String voornaam, String achternaam) {
+
+    public Persoon(String voornaam, String achternaam, int jaar, int maand, int dag) {
         this.voornaam = voornaam;
         this.achternaam = achternaam;
+        this.geboorteDatum = LocalDate.of(jaar, maand, dag);
     }
 
     public String getVoornaam() {
@@ -31,17 +35,16 @@ public class Persoon {
         this.achternaam = achternaam;
     }
 
-    public void setLeeftijd(int gjaar, int gmaand, int gdag){
+    public void setGeboorteDatum(int gjaar, int gmaand, int gdag){
         this.geboorteDatum = LocalDate.of(gjaar, gmaand, gdag);
-        LocalDate vandaag = LocalDate.now();
-        this.leeftijd = Period.between(this.geboorteDatum, vandaag).getYears();
-    }
-
-    public int getLeeftijd(){
-        return this.leeftijd;
     }
 
     public LocalDate getGeboorteDatum(){
         return this.geboorteDatum;
+    }
+
+    public int getAge(){
+        LocalDate nu = LocalDate.now();
+        return(Period.between(this.geboorteDatum, nu).getYears());
     }
 }

@@ -4,27 +4,32 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Lidmaatschap{
-    public Persoon persoon;
+    protected Persoon persoon;
     private double contributie;
-    LocalDate aanmelding;
-    public int jarenActief;
+    private LocalDate aanmelding;
+
+
 
     public Lidmaatschap() {
     
     }
     
     public void setPersoon(String vnaam, String anaam, int jaar, int maand, int dag){
-        Persoon p = new Persoon(vnaam, anaam);
-        this.persoon = p;
-        this.persoon.setLeeftijd(jaar, maand, dag);        
+        this.persoon = new Persoon(vnaam, anaam, jaar, maand, dag);
+
+
     }
 
-    public void getPersoon(){
-        System.out.println(this.persoon);
+    public Persoon getPersoon(){
+        return this.persoon;
+    }
+    public int getAge(){
+        LocalDate nu = LocalDate.now();
+        return(Period.between(persoon.getGeboorteDatum(), nu).getYears());
     }
 
     public void setContributie(){
-        int lt = this.persoon.getLeeftijd();
+        int lt = this.persoon.getAge();
         if(lt > 0 && lt < 12){
             this.contributie = 5.0;
         } else if (lt > 11 && lt < 18) {
@@ -44,15 +49,13 @@ public class Lidmaatschap{
 
     public void setAanmeldDatum(int jaar, int maand, int dag){
         this.aanmelding = LocalDate.of(jaar, maand, dag);
-        LocalDate nu = LocalDate.now();
-        this.jarenActief = Period.between(this.aanmelding, nu).getYears();
     }
-
-    public void getAanmelding(){
-        System.out.println(this.aanmelding);
-    }
-
     public int getJarenActief(){
-        return this.jarenActief;
+        LocalDate nu = LocalDate.now();
+        return(Period.between(this.aanmelding, nu).getYears());
     }
+
+
+
+
 }
